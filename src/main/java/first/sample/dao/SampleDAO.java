@@ -56,5 +56,10 @@ public class SampleDAO extends AbstractDAO{
 		update("sample.updateFile", map);
 	}
 
+	@SuppressWarnings("unchecked")
+	public Map<String, Object> selectUserID(Map<String, Object> map) throws Exception{
+		return (Map<String,Object>)selectOne("sample.selectUserID",map);
+	}
+
 
 }

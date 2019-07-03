@@ -46,7 +46,7 @@
                     0,
                     'N',
                     NOW(),
-                    'Admin'
+                    #{CREA_ID}
                 )
         ]]>
     </insert>
@@ -114,7 +114,7 @@
                     #{ORIGINAL_FILE_NAME},
                     #{STORED_FILE_NAME},
                     #{FILE_SIZE},
-                    'Admin'
+                    #{CREA_ID}
                 )
         ]]>
     </insert>
@@ -152,6 +152,22 @@
                     IDX = #{FILE_IDX}	
         ]]> 
     </update> 
+    
+    <select id="selectUserID" parameterType="HashMap" resultType="HashMap">
+	 	 <![CDATA[
+	      		SELECT
+	          		IDX,
+	          		UID,
+	          		UPW,
+	          		UNICK
+	      		FROM
+	          		TB_USER
+	      		WHERE
+	          		UID=#{UID}
+	 	 ]]>
+</select>
+    
+    
 </mapper>
 
 

@@ -30,6 +30,7 @@ public class FileUtils {
 		Map<String, Object> listMap = null; 
 		
 		String boardIdx = String.valueOf(map.get("IDX")); 
+		String crea_Id = map.get("CREA_ID").toString();
 		
 		File file = new File(filePath); 
 		if(file.exists() == false){ 
@@ -52,6 +53,7 @@ public class FileUtils {
 				listMap.put("ORIGINAL_FILE_NAME", originalFileName); 
 				listMap.put("STORED_FILE_NAME", storedFileName); 
 				listMap.put("FILE_SIZE", multipartFile.getSize()); 
+				listMap.put("CREA_ID", crea_Id); 
 				list.add(listMap); 
 				
 			} 
@@ -74,7 +76,8 @@ public class FileUtils {
 		List<Map<String,Object>> list = new ArrayList<Map<String,Object>>(); 
 		Map<String, Object> listMap = null; 
 		
-		String boardIdx = (String)map.get("IDX"); 
+		String boardIdx = (String)map.get("IDX");
+		String crea_Id = map.get("CREA_ID").toString();
 		String requestName = null; 
 		String idx = null; 
 		
@@ -93,6 +96,7 @@ public class FileUtils {
 				listMap.put("ORIGINAL_FILE_NAME", originalFileName); 
 				listMap.put("STORED_FILE_NAME", storedFileName); 
 				listMap.put("FILE_SIZE", multipartFile.getSize()); 
+				listMap.put("CREA_ID", crea_Id);
 				list.add(listMap); 
 				
 			}

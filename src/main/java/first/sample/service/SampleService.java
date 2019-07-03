@@ -4,6 +4,8 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import first.sample.spring.UserInfo;
+
 public interface SampleService {
 
 	Map<String, Object> selectBoardList(Map<String, Object> map) throws Exception;
@@ -15,5 +17,7 @@ public interface SampleService {
 	void updateBoard(Map<String, Object> map, HttpServletRequest request) throws Exception;
 
 	void deleteBoard(Map<String, Object> map) throws Exception;
+
+	UserInfo loginUser(Map<String, Object> map) throws Exception;
 
 }

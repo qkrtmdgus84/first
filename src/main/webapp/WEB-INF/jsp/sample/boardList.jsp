@@ -5,7 +5,16 @@
 <%@ include file="/WEB-INF/include/include-header.jspf" %> 
 </head> 
 <body> 
-	<h2>자산 목록</h2> 
+	<div align="right">
+        <c:choose>
+            <c:when test="${empty userInfo }">
+                <a href="#this" class="btn" id="login">로그인</a><a href="#this" class="btn" id="join">회원가입</a>
+            </c:when>
+            <c:otherwise>
+                <a href="#this" class="btn" id="logout">로그아웃</a>
+            </c:otherwise>
+        </c:choose>
+    </div>
 	<table class="board_list"> 
 		<colgroup> 
 			<col width="10%"/> 
@@ -45,8 +54,9 @@
     </c:if>
     <input type="hidden" id="currentPageNo" name="currentPageNo"/>
 	
-	<br/> 
-	<a href="#this" class="btn" id="write">글쓰기</a> 
+	<c:if test="${! empty userInfo }">
+       <a href="#this" class="btn" id="write">글쓰기</a>
+    </c:if>
 	
 	<%@ include file="/WEB-INF/include/include-body.jspf" %> 
 	<script type="text/javascript">
@@ -59,7 +69,20 @@
 			$("a[name='title']").on("click", function(e){ //제목 
 				e.preventDefault(); 
 				fn_openBoardDetail($(this)); 
-			}); 
+			});
+			
+            $("#login").on("click",function(e){
+                e.preventDefault();
+                fn_openUserLogin();
+            });
+            $("#join").on("click",function(e){
+                e.preventDefault();
+                fn_openUserJoin();
+            });
+            $("#logout").on("click",function(e){
+                e.preventDefault();
+                fn_logoutUser();
+            });
 		}); 
 		
 		function fn_openBoardWrite(){ 
@@ -84,6 +107,21 @@
             comSubmit.submit();
         }
         
+        function fn_openUserLogin(){
+            var comSubmit = new ComSubmit();
+            comSubmit.setUrl("<c:url value='/sample/openUserLogin.do'/>");
+            comSubmit.submit();
+        }
+        function fn_openUserJoin(){
+            var comSubmit = new ComSubmit();
+            comSubmit.setUrl("<c:url value='/sample/openUserJoin.do'/>");
+            comSubmit.submit();
+        }
+        function fn_logoutUser(){
+            var comSubmit = new ComSubmit();
+            comSubmit.setUrl("<c:url value='/sample/logoutUser.do'/>");
+            comSubmit.submit();
+        }
 	</script>	
 </body> 
 </html>

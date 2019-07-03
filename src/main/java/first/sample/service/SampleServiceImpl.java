@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import first.common.util.FileUtils;
 import first.sample.dao.SampleDAO;
+import first.sample.spring.UserInfo;
 
 @Service("sampleService")
 public class SampleServiceImpl implements SampleService{
@@ -96,6 +97,22 @@ public class SampleServiceImpl implements SampleService{
 	@Override
 	public void deleteBoard(Map<String, Object> map) throws Exception {
 		sampleDAO.deleteBoard(map);
+	}
+
+	@Override
+	public UserInfo loginUser(Map<String, Object> map) throws Exception {
+	    Map<String,Object> tempMap = sampleDAO.selectUserID(map);
+	    UserInfo userInfo = null;
+	    if(tempMap.get("UPW").equals(map.get("UPW").toString())) {
+	        userInfo = new UserInfo(tempMap.get("UID").toString(),
+	                Integer.parseInt(tempMap.get("IDX").toString()),
+	                tempMap.get("UNICK").toString());
+	        userInfo.setError(false);
+	        return userInfo;
+	    }else {
+	        userInfo = new UserInfo(true);
+	        return userInfo; 
+	    }
 	}
 
 
